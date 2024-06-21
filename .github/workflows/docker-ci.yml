@@ -61,6 +61,6 @@ jobs:
         tags: |
             headscale.mm.md/${{ env.GHCR_REPOSITORY }}:${{ env.SHORT_SHA }}
             headscale.mm.md/${{ env.GHCR_REPOSITORY }}:${{ env.TAG }}
-        provenance: true
-        sbom: true
+        provenance: false
+        sbom: false
         push: true
