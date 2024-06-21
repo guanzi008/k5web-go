@@ -27,7 +27,7 @@ jobs:
         submodules: recursive
 
 
-    - name: Login to ghcr.io
+    - name: Login to headscale.mm.md
       uses: docker/login-action@v3.2.0
       with:
         registry: headscale.mm.md
@@ -59,8 +59,8 @@ jobs:
           org.opencontainers.image.version=${{ env.FIXED_TAG }}
           org.opencontainers.image.revision=${{ github.sha }}
         tags: |
-            ghcr.io/${{ env.GHCR_REPOSITORY }}:${{ env.SHORT_SHA }}
-            ghcr.io/${{ env.GHCR_REPOSITORY }}:${{ env.TAG }}
+            headscale.mm.md/${{ env.GHCR_REPOSITORY }}:${{ env.SHORT_SHA }}
+            headscale.mm.md/${{ env.GHCR_REPOSITORY }}:${{ env.TAG }}
         provenance: true
         sbom: true
         push: true
