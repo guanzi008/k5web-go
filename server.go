@@ -25,12 +25,12 @@ func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// Handle static files
 	fileServer := http.FileServer(http.FS(staticFiles))
-	http.Handle("/", fileServer)
+	http.Handle("/dist", fileServer)
 
 	// Start HTTP server for redirecting to HTTPS
 	go func() {
-		fmt.Println("Starting HTTP server on http://127.0.0.1:8080")
-		if err := http.ListenAndServe(":8080", http.HandlerFunc(redirectToHTTPS)); err != nil {
+		fmt.Println("Starting HTTP server on http://127.0.0.1:80")
+		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToHTTPS)); err != nil {
 			log.Fatalf("HTTP server failed to start: %v", err)
 		}
 	}()
@@ -48,14 +48,14 @@ func main() {
 
 	// Start HTTPS server
 	server := &http.Server{
-		Addr:      ":8443",
+		Addr:      ":443",
 		Handler:   http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			fileServer.ServeHTTP(w, r)
 		}),
 		TLSConfig: tlsConfig,
 	}
 
-	fmt.Println("Starting HTTPS server on https://127.0.0.1:8443")
+	fmt.Println("Starting HTTPS server on https://127.0.0.1:443")
 	err = server.ListenAndServeTLS("", "")
 	if err != nil {
 		log.Fatalf("HTTPS server failed to start: %v", err)
