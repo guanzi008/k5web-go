@@ -1,0 +1,109 @@
+name: k5web Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Build frontend
+      run: |
+        yarn install
+        yarn build
+        ls -alh
+
+    - name: Setup Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '1.22.4'
+
+    # - name: Install cross-compilation tools
+    #   run: |
+    #     sudo apt-get update
+    #     sudo apt-get install -y mingw-w64 gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf
+
+    - name: Build for Windows amd64
+      run: |
+        export GOOS=windows
+        export GOARCH=amd64
+        # export CC=x86_64-w64-mingw32-gcc
+        export CGO_ENABLED=0
+        # cd memos
+        go build -o k5web-windows-amd64.exe server.go
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: k5web-binaries
+        path: |
+          k5web-windows-amd64.exe
+        retention-days: 7
+        chunk-size: 10485760 # 10 MB
+
+    # - name: Build for Windows arm64
+    #   run: |
+    #     export GOOS=windows
+    #     export GOARCH=arm64
+    #     export CC=aarch64-w64-mingw32-gcc
+    #     export CGO_ENABLED=1
+    #     cd memos
+    #     go build -o memos-windows-arm64.exe ./bin/memos/main.go
+
+    # - name: Build for Linux amd64
+    #   run: |
+    #     export GOOS=linux
+    #     export GOARCH=amd64
+    #     export CGO_ENABLED=0
+    #     cd memos
+    #     go build -o memos-linux-amd64 ./bin/memos/main.go
+
+    # - name: Build for Linux arm64
+    #   run: |
+    #     export GOOS=linux
+    #     export GOARCH=arm64
+    #     export CC=aarch64-linux-gnu-gcc
+    #     export CGO_ENABLED=1
+    #     cd memos
+    #     go build -o memos-linux-arm64 ./bin/memos/main.go
+
+    # - name: Build for macOS amd64
+    #   run: |
+    #     export GOOS=darwin
+    #     export GOARCH=amd64
+    #     export CGO_ENABLED=0
+    #     cd memos
+    #     go build -o memos-darwin-amd64 ./bin/memos/main.go
+
+    # - name: Build for macOS arm64
+    #   run: |
+    #     export GOOS=darwin
+    #     export GOARCH=arm64
+    #     export CGO_ENABLED=0
+    #     cd memos
+    #     go build -o memos-darwin-arm64 ./bin/memos/main.go
+
+    # - name: Upload artifacts
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: memos-binaries
+    #     path: |
+    #       memos/memos-windows-amd64.exe
+    #       memos/memos-windows-arm64.exe
+    #       memos/memos-linux-amd64
+    #       memos/memos-linux-arm64
+    #       memos/memos-darwin-amd64
+    #       memos/memos-darwin-arm64
+    #     retention-days: 7
+    #     chunk-size: 10485760 # 10 MB
