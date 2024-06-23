@@ -24,6 +24,7 @@ jobs:
         yarn config set registry https://registry.npmmirror.com
         yarn install
         yarn build
+        yarn make
         ls -alh
 
     - name: Setup Go
@@ -51,6 +52,7 @@ jobs:
         name: k5web-binaries
         path: |
           k5web-windows-amd64.exe
+          k5web.exe
         retention-days: 7
         chunk-size: 10485760 # 10 MB
 
