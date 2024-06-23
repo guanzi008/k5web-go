@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"path"
+	// "path"
 )
 
 //go:embed dist/*
