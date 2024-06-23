@@ -25,7 +25,7 @@ func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 func main() {
 	// Handle static files
 	fileServer := http.FileServer(http.FS(staticFiles))
-	http.Handle("/dist", fileServer)
+	http.Handle("dist/", fileServer)
 
 	// Start HTTP server for redirecting to HTTPS
 	go func() {
