@@ -24,8 +24,18 @@ func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	// Handle static files
-	fileServer := http.FileServer(http.FS(staticFiles))
-	http.Handle("dist/", fileServer)
+	// Strip the "dist" prefix and serve static files from the root
+	httpFS := http.FS(staticFiles)
+	fileServer := http.FileServer(httpFS)
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if !strings.HasPrefix(r.URL.Path, "/dist/") {
+			http.NotFound(w, r)
+			return
+		}
+		r.URL.Path = strings.TrimPrefix(r.URL.Path, "/dist")
+		fileServer.ServeHTTP(w, r)
+	})
+
 
 	// Start HTTP server for redirecting to HTTPS
 	go func() {
