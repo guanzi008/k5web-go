@@ -1,4 +1,3 @@
-// main.go
 package main
 
 import (
@@ -7,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"path"
 )
 
 //go:embed dist/*
@@ -30,8 +30,16 @@ func main() {
 	// Handle root path to serve index.html
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/" {
-			http.ServeFile(w, r, "dist/index.html")
+			// Serve the embedded index.html file
+			data, err := staticFiles.ReadFile("dist/index.html")
+			if err != nil {
+				http.Error(w, "Could not read index.html", http.StatusInternalServerError)
+				return
+			}
+			w.Header().Set("Content-Type", "text/html")
+			w.Write(data)
 		} else {
+			// Serve other static files
 			fileServer.ServeHTTP(w, r)
 		}
 	})
@@ -58,9 +66,7 @@ func main() {
 	// Start HTTPS server
 	server := &http.Server{
 		Addr:      ":443",
-		Handler:   http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fileServer.ServeHTTP(w, r)
-		}),
+		Handler:   http.DefaultServeMux,
 		TLSConfig: tlsConfig,
 	}
 
