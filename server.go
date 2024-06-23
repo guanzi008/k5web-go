@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	// "path"
+	"io/fs"
 )
 
 //go:embed dist/*
@@ -23,8 +23,11 @@ func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// Handle static files
-	httpFS := http.FS(staticFiles)
+	// Convert embed.FS to http.FileSystem
+	httpFS, err := fs.Sub(staticFiles, "dist")
+	if err != nil {
+		log.Fatalf("Failed to create sub filesystem: %v", err)
+	}
 	fileServer := http.FileServer(http.FS(httpFS))
 
 	// Handle root path to serve index.html
