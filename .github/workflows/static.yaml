@@ -17,7 +17,7 @@ jobs:
     - name: Build frontend
       run: |
         git clone --branch pages --depth 1 https://github.com/silenty4ng/k5web.git dist
-
+        rm -rf dist/.git
 
     - name: Setup Go
       uses: actions/setup-go@v2
