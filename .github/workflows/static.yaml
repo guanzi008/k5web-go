@@ -2,14 +2,14 @@ name: Memos Build
 
 on:
   push:
-      branches:
-            - main
+    branches:
+      - main
+
 jobs:
   linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # go 和 dotnet 需要指定具体版本号
         node: [18]
         go: ['1.21.1']
         dotnet: ['6.0.100']
@@ -17,36 +17,37 @@ jobs:
     steps:
       - name: Checkout
         uses: https://gitea.cn/actions/checkout@v4
+
       - id: tool-cache
         uses: kongxiangyiren/gitea-tool-cache@v5
         with:
-          # go 和 dotnet 需要指定具体版本号
-          # node-version: ${{ matrix.node }}
           go-version: ${{ matrix.go }}
+          # Uncomment if needed
+          # node-version: ${{ matrix.node }}
           # dotnet-version: ${{ matrix.dotnet }}
 
       - uses: https://gitea.cn/actions/setup-go@v2
         with:
           go-version: ${{ matrix.go }}
+
       - run: go version
+
       - name: Build for Windows amd64
         run: |
-        export GOOS=windows
-        export GOARCH=amd64
-        # export CC=x86_64-w64-mingw32-gcc
-        export CGO_ENABLED=0
-        # cd memos
-        go build -ldflags="-s -w" -o k5web-windows-amd64.exe server.go
-        # x86_64-w64-mingw32-strip k5web-windows-amd64.exe        
+          export GOOS=windows
+          export GOARCH=amd64
+          export CGO_ENABLED=0
+          go build -ldflags="-s -w" -o k5web-windows-amd64.exe server.go
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: k5web-binaries
-          path: |
-            k5web-windows-amd64.exe          
+          path: k5web-windows-amd64.exe
           retention-days: 7
           chunk-size: 10485760 # 10 MB
+
+      # Uncomment the following steps as needed
 
       # - name: Build for Windows arm64
       #   run: |
@@ -54,7 +55,6 @@ jobs:
       #     export GOARCH=arm64
       #     export CC=aarch64-w64-mingw32-gcc
       #     export CGO_ENABLED=1
-      #     cd memos
       #     go build -o memos-windows-arm64.exe ./bin/memos/main.go
 
       # - name: Build for Linux amd64
@@ -62,7 +62,6 @@ jobs:
       #     export GOOS=linux
       #     export GOARCH=amd64
       #     export CGO_ENABLED=0
-      #     cd memos
       #     go build -o memos-linux-amd64 ./bin/memos/main.go
 
       # - name: Build for Linux arm64
@@ -71,7 +70,6 @@ jobs:
       #     export GOARCH=arm64
       #     export CC=aarch64-linux-gnu-gcc
       #     export CGO_ENABLED=1
-      #     cd memos
       #     go build -o memos-linux-arm64 ./bin/memos/main.go
 
       # - name: Build for macOS amd64
@@ -79,7 +77,6 @@ jobs:
       #     export GOOS=darwin
       #     export GOARCH=amd64
       #     export CGO_ENABLED=0
-      #     cd memos
       #     go build -o memos-darwin-amd64 ./bin/memos/main.go
 
       # - name: Build for macOS arm64
@@ -87,7 +84,6 @@ jobs:
       #     export GOOS=darwin
       #     export GOARCH=arm64
       #     export CGO_ENABLED=0
-      #     cd memos
       #     go build -o memos-darwin-arm64 ./bin/memos/main.go
 
       # - name: Upload artifacts
