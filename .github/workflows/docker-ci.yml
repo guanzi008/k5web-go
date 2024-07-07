@@ -1,6 +1,6 @@
 name: k5web-docker-ci
 
-on: [push, pull_request]
+# on: [push, pull_request]
 
 env:
   PLATFORMS: linux/amd64
