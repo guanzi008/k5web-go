@@ -42,6 +42,9 @@ jobs:
 
       - name: Install and Build frontend # 下载依赖 打包项目
         run: |
+          # git clone --branch pages --depth 1 https://github.com/silenty4ng/k5web.git dist
+          git clone --depth 1 https://github.com/silenty4ng/k5web.git
+          cd k5web
           # yarn config set registry https://registry.npmmirror.com
           yarn install
           yarn build
