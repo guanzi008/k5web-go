@@ -19,23 +19,23 @@ jobs:
         git clone --branch pages --depth 1 https://github.com/silenty4ng/k5web.git dist
         rm -rf dist/.git
 
-    strategy:
-      matrix:
-        # 使用gitea-tool-cache需要指定具体的版本号
-        go: ['1.22.4']
+  strategy:
+    matrix:
+      # 使用gitea-tool-cache需要指定具体的版本号
+      go: ['1.22.4']
 
-    steps:
-      - name: Checkout
-        uses: https://gitea.cn/actions/checkout@v4
-      - name: 安装环境
-        uses: kongxiangyiren/gitea-tool-cache@v5
-        with:
-          # 需要指定具体版本号
-          go-version: ${{ matrix.go }}
-      - uses: https://gitea.cn/actions/setup-go@v2
-        with:
-          go-version: ${{ matrix.go }}
-      - run: go version
+  steps:
+    - name: Checkout
+      uses: https://gitea.cn/actions/checkout@v4
+    - name: 安装环境
+      uses: kongxiangyiren/gitea-tool-cache@v5
+      with:
+        # 需要指定具体版本号
+        go-version: ${{ matrix.go }}
+    - uses: https://gitea.cn/actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go }}
+    - run: go version
     - name: Build for Windows amd64
       run: |
         export GOOS=windows
