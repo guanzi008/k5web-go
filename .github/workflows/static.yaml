@@ -26,6 +26,12 @@ jobs:
           # Uncomment if needed
           # node-version: ${{ matrix.node }}
           # dotnet-version: ${{ matrix.dotnet }}
+          
+      - name: Build frontend
+        run: |
+          yarn config set registry https://registry.npmmirror.com
+          yarn install
+          yarn build
 
       - uses: https://gitea.cn/actions/setup-go@v2
         with:
