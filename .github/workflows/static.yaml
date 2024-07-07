@@ -30,7 +30,7 @@ jobs:
           go-version: ${{ matrix.go }}
       - run: go version
       - name: Build for Windows amd64
-      - run: |
+        run: |
         export GOOS=windows
         export GOARCH=amd64
         # export CC=x86_64-w64-mingw32-gcc
