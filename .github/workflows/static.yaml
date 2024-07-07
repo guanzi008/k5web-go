@@ -1,11 +1,9 @@
-name: k5web Build
+name: Memos Build
 
 on:
   push:
-    branches:
-      - main
-      - master
-
+      branches:
+            - main
 jobs:
   linux:
     runs-on: ubuntu-latest
