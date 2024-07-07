@@ -31,7 +31,10 @@ jobs:
         with:
           # gitea-tool-cache导出 node 具体版本
           node-version: ${{ steps.tool-cache.outputs.node-version }}
-      - run: node -v    
+        run: |
+          node -v 
+          npm install --global yarn
+
 
       - name: Build frontend
         run: |
