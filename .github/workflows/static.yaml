@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        # node: [18]
+        node: [20]
         go: ['1.22.4']
         # dotnet: ['6.0.100']
 
@@ -24,9 +24,15 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
           # Uncomment if needed
-          # node-version: ${{ matrix.node }}
+          node-version: ${{ matrix.node }}
           # dotnet-version: ${{ matrix.dotnet }}
-          
+
+      - uses: https://gitea.cn/actions/setup-node@v4
+        with:
+          # gitea-tool-cache导出 node 具体版本
+          node-version: ${{ steps.tool-cache.outputs.node-version }}
+      - run: node -v    
+
       - name: Build frontend
         run: |
           yarn config set registry https://registry.npmmirror.com
