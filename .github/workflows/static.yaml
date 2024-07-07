@@ -34,7 +34,7 @@ jobs:
       - run: node -v & npm install --global yarn
 
       - name: 缓存
-        uses: https:gitea.cn/actions/cache@v4
+        uses: https://gitea.cn/actions/cache@v4
         id: cache
         with:
           path: node_modules
