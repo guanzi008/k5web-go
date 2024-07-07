@@ -3,8 +3,8 @@ name: k5web Build
 on:
   push:
     branches:
-      - main
-      - master
+      # - main
+      # - master
 
 jobs:
   build:
