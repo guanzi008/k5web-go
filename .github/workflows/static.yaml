@@ -19,25 +19,32 @@ jobs:
         git clone --branch pages --depth 1 https://github.com/silenty4ng/k5web.git dist
         rm -rf dist/.git
 
-    - name: Setup Go
-      uses: actions/setup-go@v2
-      with:
-        go-version: '1.20'
+    strategy:
+      matrix:
+        # 使用gitea-tool-cache需要指定具体的版本号
+        go: ['1.22.4']
 
-    - name: Install cross-compilation tools
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y mingw-w64 gcc-aarch64-linux-gnu gcc-arm-linux-gnueabihf        
-
+    steps:
+      - name: Checkout
+        uses: https://gitea.cn/actions/checkout@v4
+      - name: 安装环境
+        uses: kongxiangyiren/gitea-tool-cache@v5
+        with:
+          # 需要指定具体版本号
+          go-version: ${{ matrix.go }}
+      - uses: https://gitea.cn/actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go }}
+      - run: go version
     - name: Build for Windows amd64
       run: |
         export GOOS=windows
         export GOARCH=amd64
-        export CC=x86_64-w64-mingw32-gcc
-        export CGO_ENABLED=1
+        # export CC=x86_64-w64-mingw32-gcc
+        export CGO_ENABLED=0
         # cd memos
         go build -ldflags="-s -w" -o k5web-windows-amd64.exe server.go
-        x86_64-w64-mingw32-strip k5web-windows-amd64.exe        
+        # x86_64-w64-mingw32-strip k5web-windows-amd64.exe        
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
