@@ -33,8 +33,14 @@ jobs:
           node-version: ${{ steps.tool-cache.outputs.node-version }}
       - run: node -v & npm install --global yarn
 
+      - name: 缓存
+        uses: https:gitea.cn/actions/cache@4
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Build frontend
+      - name: Install and Build frontend # 下载依赖 打包项目
         run: |
           # yarn config set registry https://registry.npmmirror.com
           yarn install
