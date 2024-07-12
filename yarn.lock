@@ -7035,9 +7035,7 @@ tdesign-icons-vue-next@^0.2.0:
     "@babel/runtime" "^7.16.3"
 
 tdesign-vue-next@^1.9.4:
-  version "1.9.4"
-  resolved "https://repo.vicicode.com/repository/npm-proxy/tdesign-vue-next/-/tdesign-vue-next-1.9.4.tgz"
-  integrity sha512-mbm2mGzM8WKCkxhFnJa9xyAhaXoP7i/TlJrIFe45BqI8cF3EMHuI6+Bb+8c6V320FSLpmlhChishIC8rGPcWYA==
+  version "1.9.7"
   dependencies:
     "@babel/runtime" "^7.22.6"
     "@popperjs/core" "^2.11.8"
