@@ -584,9 +584,7 @@
     which "^2.0.2"
 
 "@electron-forge/maker-deb@^7.2.0":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@electron-forge/maker-deb/-/maker-deb-7.3.1.tgz"
-  integrity sha512-A+UAxIcSsUoks9hiYoYHe3GIz02OkBBY7quVfiSUrYe2HXB7/++PsxOJ6pSwAFyJ9gzRBU+rSigocXOCFyvB8Q==
+  version "7.4.0"
   dependencies:
     "@electron-forge/maker-base" "7.3.1"
     "@electron-forge/shared-types" "7.3.1"
