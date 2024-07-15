@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"io/fs"
+	"os"
 )
 
 //go:embed dist/*
@@ -23,6 +24,17 @@ func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// Get ports from environment variables, with default values
+	httpPort := os.Getenv("HTTP_PORT")
+	if httpPort == "" {
+		httpPort = "80"
+	}
+
+	httpsPort := os.Getenv("HTTPS_PORT")
+	if httpsPort == "" {
+		httpsPort = "443"
+	}
+
 	// Convert embed.FS to http.FileSystem
 	httpFS, err := fs.Sub(staticFiles, "dist")
 	if err != nil {
@@ -49,8 +61,8 @@ func main() {
 
 	// Start HTTP server for redirecting to HTTPS
 	go func() {
-		fmt.Println("Starting HTTP server on http://127.0.0.1:80")
-		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToHTTPS)); err != nil {
+		fmt.Printf("Starting HTTP server on http://127.0.0.1:%s\n", httpPort)
+		if err := http.ListenAndServe(":"+httpPort, http.HandlerFunc(redirectToHTTPS)); err != nil {
 			log.Fatalf("HTTP server failed to start: %v", err)
 		}
 	}()
@@ -68,12 +80,12 @@ func main() {
 
 	// Start HTTPS server
 	server := &http.Server{
-		Addr:      ":443",
+		Addr:      ":" + httpsPort,
 		Handler:   http.DefaultServeMux,
 		TLSConfig: tlsConfig,
 	}
 
-	fmt.Println("Starting HTTPS server on https://127.0.0.1:443")
+	fmt.Printf("Starting HTTPS server on https://127.0.0.1:%s\n", httpsPort)
 	err = server.ListenAndServeTLS("", "")
 	if err != nil {
 		log.Fatalf("HTTPS server failed to start: %v", err)
