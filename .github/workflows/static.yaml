@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         node: [20]
-        go: ['1.10']
+        go: ['1.17']
         # dotnet: ['6.0.100']
 
     steps:
