@@ -63,11 +63,20 @@ jobs:
           export CGO_ENABLED=0
           go build -ldflags="-s -w" -o k5web-windows-amd64.exe server.go
 
+      - name: Build for Linux amd64
+        run: |
+          export GOOS=linux
+          export GOARCH=amd64
+          export CGO_ENABLED=0
+          go build -ldflags="-s -w" -o k5web-linux-amd64 server.go
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: k5web-binaries
-          path: k5web-windows-amd64.exe
+          path: |
+            k5web-windows-amd64.exe
+            k5web-linux-amd64
           retention-days: 7
           chunk-size: 10485760 # 10 MB
 
