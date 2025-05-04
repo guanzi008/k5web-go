@@ -30,9 +30,14 @@ var httpsPort string
 func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 	// 确保在重定向时包含正确的 HTTPS 端口
 	httpsHost := r.Host
-	if httpsPort != "443" { // 如果 HTTPS 端口不是默认的 443
-		httpsHost = fmt.Sprintf("%s:%s", r.Host, httpsPort)
+
+	// 检查是否已经有端口号，如果没有再加上端口
+	if !strings.Contains(r.Host, ":") {
+		if httpsPort != "443" { // 如果 HTTPS 端口不是默认的 443
+			httpsHost = fmt.Sprintf("%s:%s", r.Host, httpsPort)
+		}
 	}
+
 	http.Redirect(w, r, "https://"+httpsHost+r.RequestURI, http.StatusMovedPermanently)
 }
 
