@@ -19,9 +19,19 @@ var serverCert []byte
 //go:embed certs/server.key
 var serverKey []byte
 
+// func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
+// 	http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
+// }
+
 func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
+	// 确保在重定向时包含正确的 HTTPS 端口
+	httpsHost := r.Host
+	if httpsPort != "443" { // 如果 HTTPS 端口不是默认的 443
+		httpsHost = fmt.Sprintf("%s:%s", r.Host, httpsPort)
+	}
+	http.Redirect(w, r, "https://"+httpsHost+r.RequestURI, http.StatusMovedPermanently)
 }
+
 
 func main() {
 	// Get ports from environment variables, with default values
