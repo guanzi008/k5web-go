@@ -19,6 +19,10 @@ var serverCert []byte
 //go:embed certs/server.key
 var serverKey []byte
 
+// 将 httpsPort 声明为全局变量
+var httpsPort string
+
+
 // func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 // 	http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
 // }
