@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"io/fs"
 	"os"
+	"strings"
 )
 
 //go:embed dist/*
