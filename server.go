@@ -105,6 +105,7 @@ func main() {
 	}
 
 	fmt.Printf("Starting HTTPS server on https://127.0.0.1:%s\n", httpsPort)
+	fmt.Printf("环境变量设置自定义端口\n在Linux中HTTPS_PORT=8443 k5web\n在Windows PowerShell中 $env:HTTPS_PORT="8443" ; ./k5web-windows-amd64.exe \n Windows CMD中 set HTTPS_PORT=8443")
 	err = server.ListenAndServeTLS("", "")
 	if err != nil {
 		log.Fatalf("HTTPS server failed to start: %v", err)
