@@ -602,9 +602,7 @@
     electron-installer-redhat "^3.2.0"
 
 "@electron-forge/maker-squirrel@^7.2.0":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@electron-forge/maker-squirrel/-/maker-squirrel-7.3.1.tgz"
-  integrity sha512-eUOTdt5KTt/kWl1HIQHBOvlJbrhqVeXMiPwSXffVWWWJb+h+ckFdQmu1jtQySWKcgj7ZkbP1j+0uQFm82Nb5gQ==
+  version "7.8.1"
   dependencies:
     "@electron-forge/maker-base" "7.3.1"
     "@electron-forge/shared-types" "7.3.1"
