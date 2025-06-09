@@ -1579,9 +1579,7 @@ adler-32@~1.3.0:
   integrity sha512-ynZ4w/nUUv5rrsR8UUGoe1VC9hZj6V5hU9Qw1HlMDJGEJw5S7TfTErWTjMys6M7vr0YWcPqs3qAr4ss0nDfP+A==
 
 aegis-web-sdk@^1.39.1:
-  version "1.39.1"
-  resolved "https://registry.npmjs.org/aegis-web-sdk/-/aegis-web-sdk-1.39.1.tgz"
-  integrity sha512-PkMAzeekaLpo/PmfspXiHfmGwY6DfWf7xUl8hrlkmBajQti1HqKC6pHoO3gwVPDiA9Sio5abjFGDcPjxxVTcJg==
+  version "1.39.3"
   dependencies:
     web-vitals "^3.4.0"
 
