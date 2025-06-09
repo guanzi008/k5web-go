@@ -1189,7 +1189,7 @@
   integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
 
 "@types/lodash@^4.14.186":
-  version "4.17.6"
+  version "4.17.17"
   dependencies:
     undici-types "~5.26.4"
 
