@@ -590,9 +590,7 @@
     electron-installer-debian "^3.2.0"
 
 "@electron-forge/maker-rpm@^7.2.0":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@electron-forge/maker-rpm/-/maker-rpm-7.3.1.tgz"
-  integrity sha512-ICf9SyXoT6nNC8qROIJhuiWByDhgtf0CWVUKIC8oDvQ2N3hQCNhDwpKycAm2psX30j1M/HpKfqe0C+pBntcW+w==
+  version "7.8.1"
   dependencies:
     "@electron-forge/maker-base" "7.3.1"
     "@electron-forge/shared-types" "7.3.1"
