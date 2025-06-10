@@ -503,9 +503,7 @@
     ajv-keywords "^3.4.1"
 
 "@electron-forge/cli@^7.2.0":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@electron-forge/cli/-/cli-7.3.1.tgz"
-  integrity sha512-qPIeLxUO5d0xqiJZn0eZ17ytkDjFCN1acgrO/4B767PHsy5MmylyK0ulnRje/aQ/K+u/bN7N0cDyWs3JAEYZrQ==
+  version "7.8.1"
   dependencies:
     "@electron-forge/core" "7.3.1"
     "@electron-forge/shared-types" "7.3.1"
