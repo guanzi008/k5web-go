@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"io/fs"
+	"os"
 )
 
 //go:embed dist/*
@@ -18,11 +19,41 @@ var serverCert []byte
 //go:embed certs/server.key
 var serverKey []byte
 
+// 将 httpsPort 声明为全局变量
+var httpsPort string
+
+
 func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "https://"+r.Host+r.RequestURI, http.StatusMovedPermanently)
 }
 
+// func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
+// 	// 确保在重定向时包含正确的 HTTPS 端口
+// 	httpsHost := r.Host
+
+// 	// 检查是否已经有端口号，如果没有再加上端口
+// 	if !strings.Contains(r.Host, ":") {
+// 		if httpsPort != "443" { // 如果 HTTPS 端口不是默认的 443
+// 			httpsHost = fmt.Sprintf("%s:%s", r.Host, httpsPort)
+// 		}
+// 	}
+
+// 	http.Redirect(w, r, "https://"+httpsHost+r.RequestURI, http.StatusMovedPermanently)
+// }
+
+
 func main() {
+	// Get ports from environment variables, with default values
+	// httpPort := os.Getenv("HTTP_PORT")
+	// if httpPort == "" {
+	// 	httpPort = "80"
+	// }
+
+	httpsPort := os.Getenv("HTTPS_PORT")
+	if httpsPort == "" {
+		httpsPort = "443"
+	}
+
 	// Convert embed.FS to http.FileSystem
 	httpFS, err := fs.Sub(staticFiles, "dist")
 	if err != nil {
@@ -48,12 +79,12 @@ func main() {
 	})
 
 	// Start HTTP server for redirecting to HTTPS
-	go func() {
-		fmt.Println("Starting HTTP server on http://127.0.0.1:80")
-		if err := http.ListenAndServe(":80", http.HandlerFunc(redirectToHTTPS)); err != nil {
-			log.Fatalf("HTTP server failed to start: %v", err)
-		}
-	}()
+	// go func() {
+	// 	fmt.Printf("Starting HTTP server on http://127.0.0.1:%s\n", httpPort)
+	// 	if err := http.ListenAndServe(":"+httpPort, http.HandlerFunc(redirectToHTTPS)); err != nil {
+	// 		log.Fatalf("HTTP server failed to start: %v", err)
+	// 	}
+	// }()
 
 	// Load embedded certificates
 	cert, err := tls.X509KeyPair(serverCert, serverKey)
@@ -68,12 +99,21 @@ func main() {
 
 	// Start HTTPS server
 	server := &http.Server{
-		Addr:      ":443",
+		Addr:      ":" + httpsPort,
 		Handler:   http.DefaultServeMux,
 		TLSConfig: tlsConfig,
 	}
 
-	fmt.Println("Starting HTTPS server on https://127.0.0.1:443")
+	fmt.Printf("Starting HTTPS server on https://127.0.0.1:%s\n", httpsPort)
+	fmt.Printf(`环境变量设置自定义端口方式：
+- 在 Linux 中:
+    HTTPS_PORT=8443 ./k5web
+- 在 Windows PowerShell 中:
+    $env:HTTPS_PORT="8443"; ./k5web-windows-amd64.exe
+- 在 Windows CMD 中:
+    set HTTPS_PORT=8443 && k5web-windows-amd64.exe
+`)
+
 	err = server.ListenAndServeTLS("", "")
 	if err != nil {
 		log.Fatalf("HTTPS server failed to start: %v", err)
