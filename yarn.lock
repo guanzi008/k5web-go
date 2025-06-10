@@ -1187,7 +1187,7 @@
   integrity sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==
 
 "@types/lodash@^4.14.186":
-  version "4.17.6"
+  version "4.17.17"
   dependencies:
     undici-types "~5.26.4"
 
@@ -1390,9 +1390,7 @@
   integrity sha512-nOttamHUR3YzdEqdM/XXDyCSdxMA9VizUKoroLX6yTyRtggzQMHXcmwh8a7ZErcJttIBIc9s68a1B8GZ+Dmvsw==
 
 "@vue/babel-plugin-jsx@^1.1.1":
-  version "1.2.2"
-  resolved "https://registry.npmjs.org/@vue/babel-plugin-jsx/-/babel-plugin-jsx-1.2.2.tgz"
-  integrity sha512-nYTkZUVTu4nhP199UoORePsql0l+wj7v/oyQjtThUVhJl1U+6qHuoVhIvR3bf7eVKjbCK+Cs2AWd7mi9Mpz9rA==
+  version "1.4.0"
   dependencies:
     "@babel/helper-module-imports" "~7.22.15"
     "@babel/helper-plugin-utils" "^7.22.5"
@@ -1577,9 +1575,7 @@ adler-32@~1.3.0:
   integrity sha512-ynZ4w/nUUv5rrsR8UUGoe1VC9hZj6V5hU9Qw1HlMDJGEJw5S7TfTErWTjMys6M7vr0YWcPqs3qAr4ss0nDfP+A==
 
 aegis-web-sdk@^1.39.1:
-  version "1.39.1"
-  resolved "https://registry.npmjs.org/aegis-web-sdk/-/aegis-web-sdk-1.39.1.tgz"
-  integrity sha512-PkMAzeekaLpo/PmfspXiHfmGwY6DfWf7xUl8hrlkmBajQti1HqKC6pHoO3gwVPDiA9Sio5abjFGDcPjxxVTcJg==
+  version "1.39.3"
   dependencies:
     web-vitals "^3.4.0"
 
@@ -2622,9 +2618,7 @@ dargs@^7.0.0:
   integrity sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==
 
 dayjs@^1.10.3, dayjs@^1.11.5, dayjs@^1.11.9:
-  version "1.11.10"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.10.tgz"
-  integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
+  version "1.11.11"
 
 de-indent@^1.0.2:
   version "1.0.2"
