@@ -20,7 +20,7 @@ var serverCert []byte
 var serverKey []byte
 
 // 将 httpsPort 声明为全局变量
-var httpsPort string
+// var httpsPort string
 
 
 func redirectToHTTPS(w http.ResponseWriter, r *http.Request) {
