@@ -1227,14 +1227,7 @@
   integrity sha512-I8EUhyrgfLrcTkzV3TSsGyl1tSuPrEDzr0yd5m90UgNxQkyDXULk3b6MlQqTCpZpNtWe1K0hzclnZkTcLBe2UQ==
 
 "@types/sortablejs@^1.15.0", "@types/sortablejs@^1.15.1":
-  version "1.15.8"
-  resolved "https://registry.npmjs.org/@types/sortablejs/-/sortablejs-1.15.8.tgz"
-  integrity sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==
-
-"@types/svgo@2", "@types/svgo@^2.6.1":
-  version "2.6.4"
-  resolved "https://registry.npmjs.org/@types/svgo/-/svgo-2.6.4.tgz"
-  integrity sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==
+  version "1.15.6"
   dependencies:
     "@types/node" "*"
 
